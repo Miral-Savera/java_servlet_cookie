@@ -39,4 +39,24 @@
     <servlet-name>GetCookieServlet</servlet-name>
     <url-pattern>/GetCookieServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertServlet</display-name>
+    <servlet-name>InsertServlet</servlet-name>
+    <servlet-class>Crud.InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertServlet</servlet-name>
+    <url-pattern>/InsertServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayServlet</display-name>
+    <servlet-name>DisplayServlet</servlet-name>
+    <servlet-class>Crud.DisplayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayServlet</servlet-name>
+    <url-pattern>/DisplayServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
