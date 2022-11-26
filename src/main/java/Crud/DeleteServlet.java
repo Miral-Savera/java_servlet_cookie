@@ -1,5 +1,6 @@
 package Crud;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,20 +10,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 /**
- * Servlet implementation class DisplayServlet
+ * Servlet implementation class DeleteServlet
  */
-public class DisplayServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayServlet() {
+    public DeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,48 +34,22 @@ public class DisplayServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		
+		int roll_no = Integer.parseInt(request.getParameter("roll_no")) ;
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql:///MCADB","root","");
 			Statement st = con.createStatement();
-			String sql = "SELECT * FROM StudentInfo";
-			ResultSet rs = st.executeQuery(sql);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int col_count = rsmd.getColumnCount()+2;
-			
-			out.print("<h4><a href='student_form.html'>Add Student</a></h4>");
-			
-			out.println("<table border='1'>");
-			out.print("<tr>");
-			for (int i = 2; i <= col_count; i++) {
-				if(i==5) {
-					out.println("<td>Edit</td>");
-				}
-				else if(i==6) {
-					out.println("<td>Delete</td>");
-				}
-				else {
-					out.println("<td>"+rsmd.getColumnName(i)+"</td>");
-				}
+			String sql = "DELETE FROM StudentInfo WHERE roll_no="+roll_no;
+			int r = st.executeUpdate(sql);
+			if(r!=0) {
+				response.sendRedirect("DisplayServlet");
 			}
-			out.print("</tr>");
-			while(rs.next()) {
-				out.println("<tr>");
-				for (int i = 2; i <= col_count; i++) {
-					if(i==5) {
-						out.println("<td><a href='EditServelt?roll_no="+rs.getInt(1)+"'>Edit</a></td>");
-					}
-					else if(i==6) {
-						out.println("<td><a href='DeleteServlet?roll_no="+rs.getInt(1)+"'>Delete</a></td>");
-					}
-					else {
-						out.println("<td>"+rs.getString(i)+"</td>");
-					}
-				}
-				out.println("</tr>");
+			else {
+				out.println("Problem to delete Student");
+				RequestDispatcher rd = request.getRequestDispatcher("DisplayServlet");
+				rd.include(request, response);
 			}
-			out.println("</table>");
-			
 		}
 		catch(Exception e) {
 			out.println(e);

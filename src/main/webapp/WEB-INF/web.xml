@@ -59,4 +59,34 @@
     <servlet-name>DisplayServlet</servlet-name>
     <url-pattern>/DisplayServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteServlet</display-name>
+    <servlet-name>DeleteServlet</servlet-name>
+    <servlet-class>Crud.DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteServlet</servlet-name>
+    <url-pattern>/DeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditServelt</display-name>
+    <servlet-name>EditServelt</servlet-name>
+    <servlet-class>Crud.EditServelt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditServelt</servlet-name>
+    <url-pattern>/EditServelt</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateServlet</display-name>
+    <servlet-name>UpdateServlet</servlet-name>
+    <servlet-class>Crud.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateServlet</servlet-name>
+    <url-pattern>/UpdateServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
